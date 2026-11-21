@@ -8,8 +8,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Unzip project
-        run: unzip -q mishti_v02.zip
+      - name: Unzip newest project zip
+        run: |
+          ZIP=$(ls mishti_v*.zip | sort -V | tail -n 1)
+          echo "Using $ZIP"
+          unzip -q "$ZIP"
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
